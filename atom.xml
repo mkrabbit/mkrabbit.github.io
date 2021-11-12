@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://web.mkrabbit.ltd</id>
+    <title>MK Rabbit</title>
+    <updated>2021-11-12T16:35:11.119Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://web.mkrabbit.ltd"/>
+    <link rel="self" href="https://web.mkrabbit.ltd/atom.xml"/>
+    <subtitle>学习，然后继续学习（computer！）</subtitle>
+    <logo>https://web.mkrabbit.ltd/images/avatar.png</logo>
+    <icon>https://web.mkrabbit.ltd/favicon.ico</icon>
+    <rights>All rights reserved 2021, MK Rabbit</rights>
+    <entry>
+        <title type="html"><![CDATA[外部网址]]></title>
+        <id>https://web.mkrabbit.ltd/wai-bu-wang-zhi/</id>
+        <link href="https://web.mkrabbit.ltd/wai-bu-wang-zhi/">
+        </link>
+        <updated>2021-11-12T15:32:25.000Z</updated>
+    </entry>
+</feed>
