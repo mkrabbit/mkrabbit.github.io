@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://web.mkrabbit.ltd</id>
     <title>MK Rabbit</title>
-    <updated>2021-11-12T16:50:06.547Z</updated>
+    <updated>2021-11-28T10:27:29.997Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://web.mkrabbit.ltd"/>
     <link rel="self" href="https://web.mkrabbit.ltd/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://web.mkrabbit.ltd/images/avatar.png</logo>
     <icon>https://web.mkrabbit.ltd/favicon.ico</icon>
     <rights>All rights reserved 2021, MK Rabbit</rights>
+    <entry>
+        <title type="html"><![CDATA[仲恺中学]]></title>
+        <id>https://web.mkrabbit.ltd/zhong-kai-zhong-xue/</id>
+        <link href="https://web.mkrabbit.ltd/zhong-kai-zhong-xue/">
+        </link>
+        <updated>2021-11-28T10:21:33.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[外部网址]]></title>
         <id>https://web.mkrabbit.ltd/wai-bu-wang-zhi/</id>
