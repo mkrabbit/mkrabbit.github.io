@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta name="referrer" content="never">
+<meta name="keywords" content="">
+<meta name="description" content="欢迎访问[mkrabbit的blog]的个人博客">
+<meta name="author" content="kveln">
+<title>函数重载与递归函数 | mkrabbit的blog</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link
+  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+  rel='stylesheet' type='text/css'>
+<link rel="alternate" type="application/rss+xml" title="函数重载与递归函数 | mkrabbit的blog » Feed"
+  href="https://mkrabbit.top/atom.xml">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.10/build/styles/androidstudio.min.css">
+<link href="https://mkrabbit.top/styles/main.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/css/live2d.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+  <meta property="og:description" content="函数重载与递归函数" />
+  <meta property="og:url" content="https://mkrabbit.top/han-shu-chong-zai-yu-di-gui-han-shu/" />
+  <meta property="og:locale" content="zh-CN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="mkrabbit的blog" />
+  <!-- <script src="../assets/styles/scripts/tocScript.js"></script> -->
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://mkrabbit.top">mkrabbit的blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1706252264179"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  <!-- Page Header -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="https://mkrabbit.top">mkrabbit的blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/">首页</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/archives">归档</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/tags">标签</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          
+          <a class="nav-link" href="/post/about">关于</a>
+          
+        </li>
+        
+        <li class="nav-item">
+          <div class="gridea-search-container">
+            <form id="gridea-search-form" style="position: relative" data-update="1706252264179"
+              action="/search/index.html">
+              <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+              <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('https://mkrabbit.top/media/images/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        
+          <!-- 没Title为其他页面Header -->
+          
+            <!-- 没Title并且有headerType为Post：文章Header -->
+            <div class="post-heading">
+              <span class="tags">
+                
+              </span>
+              <h1>函数重载与递归函数</h1>
+              <span class="meta">
+                Posted on
+                2023-11-06，2 min read
+              </span>
+            </div>
+          
+        
+      </div>
+    </div>
+  </div>
+</header>
+  <!-- Post Content -->
+  <article id="post-content-article">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto post-content-container">
+          
+          <!-- more -->
+<p>函数重载</p>
+<p>概念：<br>
+重载函数：同一作用域中出现函数名相同，参数不同，功能相似的函数，而这些函数重载一般会有两个或两个以上的函数，取相同的函数名，但是形参的个数和类型不同，编译器根据实参和形参的类型及个数的最佳匹配，自动决定调用哪一个函数。<br>
+<img src="https://mkrabbit.top/post-images/1699246910631.png" alt="" loading="lazy"><br>
+代码展示：</p>
+<pre><code>
+#include<iostream>
+using namespace std;
+int min(int a,int b)//返回整型，且只接收两个整型
+{
+	if (a > b)
+		return b;
+	else
+		return a;
+}
+float min(float a, float b)//返回浮点型（小数），且只接收两个浮点型
+{
+	if (a > b)
+		return b;
+	else
+		return a;
+}
+float min(int a, float b)//返回浮点型，且只接收一整型一浮点型
+{
+	if (a > b)
+		return b;
+	else
+		return a;
+}
+int min(int a, int b,int c)//返回整型，且只接收三个整型
+{
+	int d=a;
+	if (b < d)
+		d = b;
+	if (c < d)
+		d = c;
+	return d;
+}
+int main()
+{
+	int a, b, e;
+	float c, d;
+	cout << "俩整数取最小" << endl;
+	cin >> a >> b;
+	cout << min(a, b)<<endl;//对应第一个min函数
+	cout << "俩小数取最小" << endl;
+	cin >> c >> d;
+	cout << min(c, d) << endl;//对应第二个min函数
+	cout << "一整数一小数取最小" << endl;
+	cin >> a >> c;
+	cout << min(a, c) << endl;//对应第三个min函数
+	cout << "三整数取最小" << endl;
+	cin >> a >> b >> e;
+	cout << min(a, b, e) << endl;//对应第四个min函数
+	return 0;
+}
+</code></pre>
+<p>运行结果<br>
+<img src="https://mkrabbit.top/post-images/1699247923496.png" alt="" loading="lazy"><br>
+如果返回值类型不同，参数相同是非法的，编译会不通过<br>
+<img src="https://mkrabbit.top/post-images/1699248816009.png" alt="" loading="lazy"><br>
+确定对重载函数的哪个函数进行调用的过程称为绑定(binding),绑定的优先次序为精确匹配、对实参的类型向高类型转换后的匹配、实参类型向低类型及相容类型转换后的匹配。<br>
+通俗点讲就是<br>
+首先，编译器会尝试进行精确匹配，即找到与实参类型完全匹配的函数定义。整型对整型，浮点型对浮点型<br>
+如果不存在精确匹配的函数定义，编译器会尝试进行隐式类型转换。它会将实参的类型向高类型进行转换，并尝试匹配函数定义的参数类型。例如，如果实参是int类型，但没有找到接受int类型参数的函数定义，编译器会将int类型向高类型转换为long或float类型，然后再进行匹配。<br>
+如果仍然找不到匹配的函数定义，编译器会尝试将实参的类型向低类型进行转换，并再次进行匹配。例如，如果实参是float类型，但没有找到接受float类型参数的函数定义，编译器会将float类型向低类型转换为int类型，然后再进行匹配<br>
+<img src="https://mkrabbit.top/post-images/1699249532819.png" alt="" loading="lazy">。<br>
+相容类型转换是指将实参类型转换为与函数定义参数类型相兼容的类型。例如，将const修饰的实参传递给不带const修饰的参数。<br>
+先后顺序就是精确匹配 &gt; 对实参的类型向高类型转换后的匹配 &gt; 实参类型向低类型转换后的匹配 &gt; 相容类型转换<br>
+编译器会按照这个顺序来确定应该调用哪个重载函数。<br>
+函数重载的好处<br>
+1、减少了函数名的数量，避免了名字空间的污染，有利于程序的可读性。<br>
+2、减少函数调用的复杂性。</p>
+<!-- more -->
+<p>递归函数<br>
+主要关注点：<br>
+1、找出递归关系（递归体）<br>
+2、确定递归出口<br>
+3、写出递归函数<br>
+一般形式<br>
+<img src="https://mkrabbit.top/post-images/1699260374834.png" alt="" loading="lazy"><br>
+代码展示：</p>
+<pre><code>
+#include<iostream>
+using namespace std;
+int add(int a)
+{
+	if (a)//递归出口，这里意思就是加到a为0的时候为表达式为false
+		return(a + add(a - 1));
+	else
+		return 0;
+}
+int main()
+{
+	int n;
+	cout << "计算！n" << endl << "n=";
+	cin >> n;
+	cout << add(n);//进入递归函数
+	return 0;
+}
+</code></pre>
+<p>运行结果<br>
+<img src="https://mkrabbit.top/post-images/1699261188866.png" alt="" loading="lazy"></p>
+
+          <div class="toc-container"></div>
+          
+          <hr />
+          <p class="next-post">下一篇：
+            <a href="https://mkrabbit.top/di-jiu-zhou/">
+              <span class="post-title">
+                第九周&rarr;
+              </span>
+            </a>
+          </p>
+          
+          <div class="comment" style="text-align: center;">
+            
+
+            
+            
+          </div>
+        </div>
+      </div>
+  </article>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+              <!-- <li class="list-inline-item">
+              <a href="https://mkrabbit.top/atom.xml" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+              </li> -->
+          </ul>
+          <p class="copyright text-muted">Copyright &copy;<span>mkrabbit的blog</span><br><a href="https://github.com/getgridea/gridea" class="Themeinfo">Powered by Gridea</a></p>
+        </div>
+      </div>
+    </div>
+   </footer>
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://mkrabbit.top/media/scripts/bootstrap.bundle.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdn.jsdelivr.net/gh/Alanrk/clean-cdn@1.0/scripts/clean-blog.min.js"></script>
+  <!-- <script src="https://mkrabbit.top/media/scripts/clean-blog.min.js"></script> -->
+  <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+  <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and(max-width:580px){.back_to_top{display:none!important}}</style>
+<a id="back_to_top" href="#" class="back_to_top">
+  <span>▲</span></a>
+<script>$(document).ready((function(_this) {
+    return function() {
+      var bt;
+      bt = $('#back_to_top');
+      if ($(document).width() > 480) {
+        $(window).scroll(function() {
+          var st;
+          st = $(window).scrollTop();
+          if (st > 30) {
+            return bt.css('display', 'block')
+          } else {
+            return bt.css('display', 'none')
+          }
+        });
+        return bt.click(function() {
+          $('body,html').animate({
+            scrollTop: 0
+          },
+          800);
+          return false
+        })
+      }
+    }
+  })(this));</script>
+  
+  <script src="https://mkrabbit.top/media/scripts/tocScript.js"></script>
+</body>
+
+</html>
