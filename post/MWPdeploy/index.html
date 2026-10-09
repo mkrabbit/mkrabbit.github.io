@@ -42,7 +42,7 @@ IP地址：10.0.0.100
     :root{
       --primary:#2679cc;
       --accent:#00c4b6;
-      --text:rgba(0, 0, 0, 0.86);
+      --text:rgba(118, 118, 118, 1);
       --card-radius:12px;
       --body-font:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       --code-font:Consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', monospace;
@@ -68,7 +68,7 @@ IP地址：10.0.0.100
   
 <meta name="description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <link rel="canonical" href="https://mkrabbit.xyz/post/MWPdeploy/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-09T23:34:09+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-09T18:12:39+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mkrabbit.xyz","name":"biu的折腾日记","position":1},{"@type":"ListItem","item":"https://mkrabbit.xyz/post/MWPdeploy/","name":"使用MDT+WDS+PXE进行网络部署Windows","position":2}]}</script>
 <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows">
 <meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
@@ -126,7 +126,7 @@ IP地址：10.0.0.100
 <a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
 
 <a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
-<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
 
     </footer>
   </aside>
@@ -180,13 +180,7 @@ IP地址：10.0.0.100
 
   <div id="nav-right">
     
-    <div id="travellings"><a class="site-page" href="https://www.travellings.cn/go.html" title="友链接力 - 随机开往" rel="nofollow noopener" target="_blank"><i class="fa-solid fa-bus fa-fw"></i></a></div>
     
-    
-    <div id="ten-years"><a class="site-page" href="https://foreverblog.cn/go.html" title="十年之约" rel="nofollow noopener" target="_blank"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div>
-    
-    
-    <div id="random"><a class="site-page" href="javascript:void(0);" title="随机文章" data-action="random-post"><i class="fa-solid fa-shuffle fa-fw"></i></a></div>
     
     
     <div id="search-button"><span class="site-page social-icon search" data-action="open-search" title="搜索"><i class="fa-solid fa-magnifying-glass fa-fw"></i></span></div>
@@ -217,8 +211,8 @@ IP地址：10.0.0.100
           <a href="/tag/wds-bu-shu-fu-wu/">WDS部署服务</a>
         </span>
         
-        <span class="post-meta-item"><i class="far fa-clock"></i> 2 min read 分钟阅读</span>
-        <span class="post-meta-item"><i class="fa-solid fa-pen-nib"></i> 702 字</span>
+        <span class="post-meta-item"><i class="far fa-clock"></i> 4 min read 分钟阅读</span>
+        <span class="post-meta-item"><i class="fa-solid fa-pen-nib"></i> 1522 字</span>
       </div>
     </div>
     
@@ -292,7 +286,53 @@ IP地址：10.0.0.100
 <h1 id="mdt">安装MDT</h1>
 <p><a href="https://www.microsoft.com/en-us/download/details.aspx?id=57917">下载地址</a></p>
 <p>一样一路下一步默认安装即可</p>
+<p><img src="/post-images/1791537134460381100.png" alt="" /></p>
 <p><img src="/post-images/1791535891904243800.png" alt="" /></p>
+<h1 id="mdt-1">MDT导入镜像并设置任务序列</h1>
+<p>在开始菜单打开MDT</p>
+<img src="/post-images/1791537284022822500.png" alt="" width="426">
+<p>右键Deployment Shares，选择New Deployment Share</p>
+<p><img src="/post-images/1791537893541363200.png" alt="" /></p>
+<p>存储路径建议放在其他盘，我放在D盘</p>
+<img src="/post-images/1791537972904164400.png" alt="" width="522">
+<p>一路next，在options中取消勾选所有询问，然后继续next，并完成finish</p>
+<img src="/post-images/1791538057477148400.png" alt="" width="525">
+<p>展开左侧的选项，右键Operating Systems，选择Import Operating System</p>
+<p><img src="/post-images/1791538188256732000.png" alt="" /></p>
+<p>在Source中，选中系统镜像光盘，ISO镜像文件可先右键装载，再选中DVD驱动器，若弹出错误提示<span style="color: #0f1115; font-size: 16px">Please fix all errors before continuing则需要更换镜像文件</span></p>
+<img src="/post-images/1791538336536385300.png" alt="" width="455">
+<p><img src="/post-images/1791538670404259700.png" alt="" /></p>
+<p>一路next并等待读条，finish即可</p>
+<img src="/post-images/1791538788708966500.png" alt="" width="514">
+<p>完成后右键Task Sequences，选择New Task Sequence创建任务序列</p>
+<img src="/post-images/1791539039531643500.png" alt="" width="345">
+<p><span style="font-size: 18px"><strong>General Settings</strong></span></p>
+<p>Task sequence ID：1</p>
+<p>Task sequence name：win10</p>
+<p>（可随意填写）</p>
+<p><span style="font-size: 18px"><strong>Select Template</strong></span></p>
+<p>默认</p>
+<p><span style="font-size: 18px"><strong>Select OS</strong></span></p>
+<p>Windows 10 Pro。。。</p>
+<p>（可任意选择你要安装的镜像）</p>
+<p><span style="font-size: 18px"><strong>Specify Product Key</strong></span></p>
+<p>默认</p>
+<p>（可选择预先填写系统激活key，按照key的类型选择选项）</p>
+<p><span style="font-size: 18px"><strong>OS Settings</strong></span></p>
+<p>Full Name：Windows 用户</p>
+<p>Organization：WORKGROUP</p>
+<p>Internet Explorer Home Page：about:blank</p>
+<p>（设置计算机名与组织名）</p>
+<p>Admin Password</p>
+<p>默认，设置密码123456</p>
+<p>（可选择是否预先设置管理员密码）</p>
+<p>一路next，完成即可</p>
+<p>右键MDT Deployment Share选择属性，将x86的选项取消，应用</p>
+<img src="/post-images/1791540428995269300.png" alt="" width="468">
+<p>右键MDT Deployment Share选择Update Deployment Share</p>
+<p><img src="/post-images/1791539952290808600.png" alt="" /></p>
+<p>一路next，完成即可</p>
+<h1 id="wds">配置WDS</h1>
 
   </div>
 
@@ -382,7 +422,7 @@ IP地址：10.0.0.100
 <a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
 
 <a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
-<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
 
     </div>
   </div>
@@ -514,7 +554,7 @@ IP地址：10.0.0.100
 <a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
 
 <a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
-<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
 
       </div>
     </div>
@@ -526,8 +566,6 @@ IP地址：10.0.0.100
       <a href="/links/">友链</a>
       <a href="/about/">关于</a>
     </div>
-    
-    <div class="footer-extra"><a href="https://hexo.io">Powered by Gridea Pro</a></div>
     
   </div>
   <div class="footer-bottom">
@@ -614,7 +652,7 @@ IP地址：10.0.0.100
   "readingProgress": true,
   "scrollToTop": true,
   "heatmapEnable": true,
-  "randomPostEnable": true,
+  "randomPostEnable": false,
   "subtitleSpeed": 120,
   "subtitleList": "既然选择远方，当不负青春，砥砺前行。\n青春由磨砺而出彩，人生因奋斗而升华！\n但行前路，不负韶华！\n每一个裂缝都是为透出光而努力",
   "navMenuJson": "[]"
