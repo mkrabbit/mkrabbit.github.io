@@ -1,26 +1,74 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto" class="not-loaded">
 <head>
-    
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="generator" content="Gridea Pro 1.3.0-beta.2">
-<title>使用MDT&#43;WDS&#43;PXE进行网络部署Windows | biu的折腾日记</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1791536943">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="使用MDT&#43;WDS&#43;PXE进行网络部署Windows | biu的折腾日记 - Atom Feed" href="/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="generator" content="Gridea Pro · Liushen Theme">
+  <meta name="generator" content="Gridea Pro 1.3.0-beta.2">
+  <title>使用MDT+WDS+PXE进行网络部署Windows | biu的折腾日记</title>
+  <meta name="description" content="配置环境：Windows Server 2016 Standard 1607
+前期准备
+将服务器的网卡设置为静态ip，以便使用DHCP服务
+设置选项在：控制面板\网络和 Internet\网络连接-网卡属性-IPV4
+例如以下：
+IP地址：10.0.0.100
+子网掩码：255.0.0.0
+其他可不设置
 
+将主机名设置...">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows">
+  <meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607
+前期准备
+将服务器的网卡设置为静态ip，以便使用DHCP服务
+设置选项在：控制面板\网络和 Internet\网络连接-网卡属性-IPV4
+例如以下：
+IP地址：10.0.0.100
+子网掩码：255.0.0.0
+其他可不设置
 
+将主机名设置...">
+  <meta property="og:image" content="/images/avatar.png">
+  <link rel="icon" href="/images/avatar.png" type="image/x-icon">
+  <link rel="alternate" type="application/atom+xml" title="biu的折腾日记" href="/atom.xml">
 
-    <meta name="description" content="" />
-    <meta name="keywords" content="WDS部署服务" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <style id="liushen-theme-vars">
+    :root{
+      --primary:#2679cc;
+      --accent:#00c4b6;
+      --text:rgba(0, 0, 0, 0.86);
+      --card-radius:12px;
+      --body-font:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --code-font:Consolas, Menlo, 'PingFang SC', 'Microsoft YaHei', monospace;
+      --sidebar-gradient:linear-gradient(60deg, #ffd7e4 0%, #c8f1ff 100%);
+      --bg-image-light:url('/media/images/bg-light.svg');
+      --bg-image-dark:url('/media/images/bg-dark.svg');
+    }
+  </style>
+  
+
+  <script>
+    (function(){
+      var pref="auto";
+      try{var saved=localStorage.getItem('liushen-theme');if(saved)pref=saved;}catch(e){}
+      var resolved=pref;
+      if(pref==='auto'){var h=new Date().getHours();resolved=(h>=6&&h<18)?'light':'dark';}
+      document.documentElement.setAttribute('data-theme',resolved);
+      document.documentElement.dataset.themePref=pref;
+    })();
+  </script>
+
+  
+  
 <meta name="description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <link rel="canonical" href="https://mkrabbit.xyz/post/MWPdeploy/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09Z","dateModified":"2026-10-09T23:34:09Z","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-09T23:34:09+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mkrabbit.xyz","name":"biu的折腾日记","position":1},{"@type":"ListItem","item":"https://mkrabbit.xyz/post/MWPdeploy/","name":"使用MDT+WDS+PXE进行网络部署Windows","position":2}]}</script>
 <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows">
 <meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
@@ -34,102 +82,173 @@
 <meta name="twitter:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
 </head>
+<body class="page-post type-post">
 
-<body>
-    <div class="main">
-        <div class="main-content">
-            
-<div class="site-header">
-    <a href="/">
-        <img class="avatar" src="/images/avatar.png?v=1791536943" alt="">
-    </a>
-    <h1 class="site-title">
-        biu的折腾日记
-    </h1>
-    <p class="site-description">
-        搞点有趣的项目玩玩
-    </p>
-    <div class="menu-container">
+  
+  <div id="reading-progress" aria-hidden="true"><span></span></div>
+  
+
+  <div id="web-bg" aria-hidden="true"></div>
+  <div id="sun-moon-cover" aria-hidden="true"></div>
+
+  
+<div id="mobile-sidebar" class="mobile-sidebar" hidden>
+  <div class="mobile-sidebar-backdrop" data-action="close-mobile-menu"></div>
+  <aside class="mobile-sidebar-panel">
+    <header class="mobile-sidebar-header">
+      <img class="mobile-avatar" src="/images/avatar.png" alt="biu的折腾日记" onerror="this.onerror=null;this.src='/media/images/default-avatar.svg';">
+      <h3 class="mobile-site-name">biu的折腾日记</h3>
+      <p class="mobile-tagline">搞点有趣的项目玩玩</p>
+    </header>
+    <nav class="mobile-sidebar-nav" id="mobile-nav-list">
+      
         
+        <a href="/" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>首页</span></a>
         
-        <a href="/" class="menu">
-            首页
-        </a>
+        <a href="/post" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>博客</span></a>
         
+        <a href="/memos" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>闪念</span></a>
         
+        <a href="/archives" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>归档</span></a>
         
-        <a href="/post" class="menu">
-            博客
-        </a>
+        <a href="/tags" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>标签</span></a>
         
+        <a href="/links" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>友链</span></a>
         
+        <a href="/post/about" class="mobile-nav-item"><i class="fa-fw fa-solid fa-bookmark"></i><span>关于</span></a>
         
-        <a href="/memos" class="menu">
-            闪念
-        </a>
-        
-        
-        
-        <a href="/archives" class="menu">
-            归档
-        </a>
-        
-        
-        
-        <a href="/tags" class="menu">
-            标签
-        </a>
-        
-        
-        
-        <a href="/links" class="menu">
-            友链
-        </a>
-        
-        
-        
-        <a href="/post/about" class="menu">
-            关于
-        </a>
-        
-        
-    </div>
-    <div class="social-container">
-        
-        
-        
-        
-        
-    </div>
+      
+    </nav>
+    <footer class="mobile-sidebar-footer">
+      
+<a class="social-icon" href="mailto:wsad5d4j@outlook.com" title="Email" rel="noopener"><i class="fa-solid fa-envelope"></i></a>
+
+<a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
+
+<a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
+<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
+    </footer>
+  </aside>
 </div>
 
-            <div class="post-detail">
-                <article class="post">
-                    <h2 class="post-title">
-                        使用MDT&#43;WDS&#43;PXE进行网络部署Windows
-                    </h2>
-                    <div class="post-info">
-                        <span>
-                            2026-10-09
-                        </span>
-                        <span>
-                            3 分钟阅读
-                        </span>
-                        
-                        <a href="/category/default/" class="post-tag post-category">
-                            默认分类
-                        </a>
-                        
-                        
-                        <a href="/tag/wds-bu-shu-fu-wu/" class="post-tag">
-                            # WDS部署服务
-                        </a>
-                        
-                    </div>
-                    
-                    <div class="post-content-wrapper">
-                        <div class="post-content" v-pre>
-                            <p><span style="color: #333333; font-size: 16px">配置环境：Windows Server 2016 Standard 1607</span></p>
+  
+<nav id="nav" class="nav-fixed">
+  <span id="blog-info">
+    <a class="nav-site-title" href="/" title="biu的折腾日记">
+      
+      <span class="site-name">biu的折腾日记</span>
+    </a>
+  </span>
+
+  <div id="menus">
+    
+    <div class="menus_items visible">
+      
+        
+          <div class="menus_item">
+            <a class="site-page" href="/"><i class="fa-fw fa-solid fa-bookmark"></i><span> 首页</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/post"><i class="fa-fw fa-solid fa-bookmark"></i><span> 博客</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/memos"><i class="fa-fw fa-solid fa-bookmark"></i><span> 闪念</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/archives"><i class="fa-fw fa-solid fa-bookmark"></i><span> 归档</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/tags"><i class="fa-fw fa-solid fa-bookmark"></i><span> 标签</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/links"><i class="fa-fw fa-solid fa-bookmark"></i><span> 友链</span></a>
+          </div>
+        
+          <div class="menus_item">
+            <a class="site-page" href="/post/about"><i class="fa-fw fa-solid fa-bookmark"></i><span> 关于</span></a>
+          </div>
+        
+      
+    </div>
+  </div>
+
+  <div id="nav-right">
+    
+    <div id="travellings"><a class="site-page" href="https://www.travellings.cn/go.html" title="友链接力 - 随机开往" rel="nofollow noopener" target="_blank"><i class="fa-solid fa-bus fa-fw"></i></a></div>
+    
+    
+    <div id="ten-years"><a class="site-page" href="https://foreverblog.cn/go.html" title="十年之约" rel="nofollow noopener" target="_blank"><i class="fa-brands fa-nfc-symbol fa-fw"></i></a></div>
+    
+    
+    <div id="random"><a class="site-page" href="javascript:void(0);" title="随机文章" data-action="random-post"><i class="fa-solid fa-shuffle fa-fw"></i></a></div>
+    
+    
+    <div id="search-button"><span class="site-page social-icon search" data-action="open-search" title="搜索"><i class="fa-solid fa-magnifying-glass fa-fw"></i></span></div>
+    
+    <div id="theme-switch"><span class="site-page" data-action="toggle-theme" title="切换配色"><i class="fa-solid fa-circle-half-stroke fa-fw"></i></span></div>
+    <div id="toggle-menu"><span class="site-page" data-action="toggle-mobile-menu" title="展开菜单"><i class="fa-solid fa-bars fa-fw"></i></span></div>
+  </div>
+</nav>
+
+
+  <div id="body-wrap" class="wrap-default">
+    
+  
+  
+  
+
+
+
+
+
+  <header id="page-header" class="post-bg nav-fixed-spacer" style="background-image:url('/media/images/default-top.svg')">
+    <div id="post-info">
+      <h1 class="post-title">使用MDT+WDS+PXE进行网络部署Windows</h1>
+      <div id="post-meta">
+        <span class="post-meta-item"><i class="far fa-calendar-alt"></i> <time datetime="2026-10-09T23:34:09+08:00">2026-10-09T23:34:09+08:00</time></span>
+        
+        <span class="post-meta-item"><i class="fas fa-tag"></i>
+          <a href="/tag/wds-bu-shu-fu-wu/">WDS部署服务</a>
+        </span>
+        
+        <span class="post-meta-item"><i class="far fa-clock"></i> 2 min read 分钟阅读</span>
+        <span class="post-meta-item"><i class="fa-solid fa-pen-nib"></i> 702 字</span>
+      </div>
+    </div>
+    
+      
+<section class="main-hero-waves-area waves-area" aria-hidden="true">
+  <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+      <path id="liushen-gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#liushen-gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)"></use>
+      <use xlink:href="#liushen-gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)"></use>
+      <use xlink:href="#liushen-gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)"></use>
+      <use xlink:href="#liushen-gentle-wave" x="48" y="7" fill="#ffffff"></use>
+    </g>
+  </svg>
+</section>
+
+    
+  </header>
+
+
+
+
+    <main id="content-inner" class="layout layout-with-aside">
+      <div id="content" class="content">
+        
+<article id="post" class="post-detail" data-link="/post/MWPdeploy/">
+  <div id="article-container" class="article-container post-content">
+    <p><span style="color: #333333; font-size: 16px">配置环境：Windows Server 2016 Standard 1607</span></p>
 <h1 id="span-stylecolor-333333-font-size-28pxspan"><span style="color: #333333; font-size: 28px">前期准备</span></h1>
 <p><span style="color: #333333; font-size: 16px">将服务器的网卡设置为静态ip，以便使用DHCP服务</span></p>
 <p><span style="color: #333333; font-size: 16px">设置选项在：控制面板\网络和 Internet\网络连接-网卡属性-IPV4</span></p>
@@ -175,70 +294,343 @@
 <p>一样一路下一步默认安装即可</p>
 <p><img src="/post-images/1791535891904243800.png" alt="" /></p>
 
-                        </div>
-                        <div class="toc-container">
-                            
-                        </div>
-                    </div>
-                </article>
-            </div>
+  </div>
 
-            
-
-            
-
-            
-<div class="site-footer">
-    Blog by biu make
-    <a class="rss" href="/atom.xml" target="_blank">
-        <i class="ri-rss-line"></i> RSS
-    </a>
-</div>
-
-        </div>
+  <div class="post-bottom">
+    <div class="post-copyright">
+      <ul class="post-copyright-list">
+        <li><strong>本文标题：</strong><span>使用MDT+WDS+PXE进行网络部署Windows</span></li>
+        <li><strong>文章作者：</strong><span>biu的折腾日记</span></li>
+        <li><strong>发布时间：</strong><span>2026-10-09T23:34:09+08:00</span></li>
+        <li><strong>本文链接：</strong><a href="https://mkrabbit.xyz/post/MWPdeploy/">https://mkrabbit.xyz/post/MWPdeploy/</a></li>
+        <li><strong>版权声明：</strong><span>本博客所有文章除特别声明外，均默认采用 CC BY-NC-SA 4.0 许可协议。</span></li>
+      </ul>
     </div>
 
-    <script>
-        hljs.initHighlightingOnLoad()
+    
+    <div class="post-tags">
+      <i class="fa-solid fa-tags"></i>
+      <a href="/tag/wds-bu-shu-fu-wu/" class="post-tag">#WDS部署服务</a>
+    </div>
+    
+  </div>
 
-        let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+  
+<nav id="post-nav" class="post-nav" data-current="/post/MWPdeploy/" aria-label="文章导航">
+  <a class="post-nav-item prev" href="#" data-role="prev" hidden>
+    <span class="label"><i class="fa-solid fa-angle-left"></i> 上一篇</span>
+    <span class="title">--</span>
+  </a>
+  <a class="post-nav-item next" href="#" data-role="next" hidden>
+    <span class="label">下一篇 <i class="fa-solid fa-angle-right"></i></span>
+    <span class="title">--</span>
+  </a>
+</nav>
 
-        
-        
-        
-        
-        
-        
-        
-        
 
-        window.addEventListener("scroll", event => {
-            let fromTop = window.scrollY;
+  <div class="related-posts" id="related-posts" hidden>
+    <div class="related-posts-headline"><i class="fa-solid fa-link"></i><span>相关推荐</span></div>
+    <div class="related-posts-list" id="related-posts-list"></div>
+  </div>
 
-            mainNavLinks.forEach((link, index) => {
-                let section = document.getElementById(decodeURI(link.hash).substring(1));
-                let nextSection = null
-                if (mainNavLinks[index + 1]) {
-                    nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-                }
-                if (section.offsetTop <= fromTop) {
-                    if (nextSection) {
-                        if (nextSection.offsetTop > fromTop) {
-                            link.classList.add("current");
-                        } else {
-                            link.classList.remove("current");
-                        }
-                    } else {
-                        link.classList.add("current");
-                    }
-                } else {
-                    link.classList.remove("current");
-                }
-            });
-        });
+  
+<section id="post-comment" class="post-comment">
+  <div class="comment-headline">
+    <i class="fa-solid fa-comments"></i>
+    <span>评论</span>
+  </div>
+  <div id="gridea-comments" data-post-link="/post/MWPdeploy/">
+    <p class="comment-loading"><i class="fa-solid fa-spinner fa-spin"></i> 评论组件加载中…</p>
+  </div>
+</section>
 
-    </script>
-<script>console.log("\n%c ✦ Gridea Pro v1.3.0-beta.2 %c · Theme: inotes v1.0.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
+</article>
+
+      </div>
+      
+  
+<aside id="aside-content" class="aside-content">
+  <div class="card-widget-wrap">
+    
+<div class="card-widget card-info">
+  <div class="card-content">
+    <div class="card-info-avatar">
+      <img class="avatar-img" src="/images/avatar.png" alt="biu的折腾日记" onerror="this.onerror=null;this.src='/media/images/default-avatar.svg';">
+    </div>
+    <div class="card-info-data">
+      <div class="author-info-name">biu的折腾日记</div>
+      <div class="author-info-description">一个热爱运维的折腾者</div>
+    </div>
+    <div class="card-info-counts">
+      <div class="count-item">
+        <div class="headline">2</div>
+        <div class="length-num">文章</div>
+      </div>
+      <div class="count-item">
+        <div class="headline">1</div>
+        <div class="length-num">标签</div>
+      </div>
+      <div class="count-item">
+        <div class="headline" id="card-info-runtime">--</div>
+        <div class="length-num">天</div>
+      </div>
+    </div>
+    <div class="card-info-social">
+      
+<a class="social-icon" href="mailto:wsad5d4j@outlook.com" title="Email" rel="noopener"><i class="fa-solid fa-envelope"></i></a>
+
+<a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
+
+<a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
+<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
+    </div>
+  </div>
+</div>
+
+    
+    
+<div class="card-widget card-announcement">
+  <div class="item-headline"><i class="fa-solid fa-bullhorn"></i><span>公告</span></div>
+  <div class="announcement-content">
+    
+    <p>欢迎来访 ✨ 这是biu的博客</p>
+  </div>
+</div>
+
+    
+<div class="card-widget card-recent-post">
+  <div class="item-headline"><i class="fa-solid fa-history"></i><span>最新文章</span></div>
+  <div class="aside-list">
+    
+      
+        
+        <div class="aside-list-item">
+          
+          <a class="thumbnail no-cover" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows"><i class="fa-solid fa-file-lines"></i></a>
+          
+          <div class="content">
+            <a class="title" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows">使用MDT+WDS+PXE进行网络部署Windows</a>
+            <time class="date">2026-10-09T23:34:09+08:00</time>
+          </div>
+        </div>
+        
+      
+        
+        <div class="aside-list-item">
+          
+          <a class="thumbnail no-cover" href="/post/about/" title="关于"><i class="fa-solid fa-file-lines"></i></a>
+          
+          <div class="content">
+            <a class="title" href="/post/about/" title="关于">关于</a>
+            <time class="date">2026-10-09T20:22:21+08:00</time>
+          </div>
+        </div>
+        
+      
+    
+  </div>
+</div>
+
+    
+<div class="card-widget card-categories">
+  <div class="item-headline"><i class="fa-solid fa-folder-open"></i><span>分类</span></div>
+  <ul class="card-category-list">
+    
+      
+        
+        <li class="card-category-list-item">
+          
+          <a class="card-category-list-link" href="/category/default/">
+            <span class="card-category-list-name">默认分类</span>
+            <span class="card-category-list-count">1</span>
+          </a>
+        </li>
+        
+      
+    
+  </ul>
+</div>
+
+    
+<div class="card-widget card-tags">
+  <div class="item-headline"><i class="fa-solid fa-tags"></i><span>标签云</span></div>
+  <div class="card-tag-cloud">
+    
+      
+        
+          
+          <a href="/tag/wds-bu-shu-fu-wu/" title="WDS部署服务 (1)" class="tag-cloud-item" data-count="1">WDS部署服务<sup>1</sup></a>
+        
+      
+    
+  </div>
+</div>
+
+    
+    
+<div class="card-widget card-webinfo">
+  <div class="item-headline"><i class="fa-solid fa-chart-pie"></i><span>网站统计</span></div>
+  <div class="webinfo">
+    <div class="webinfo-item"><span class="webinfo-label">文章</span><span class="webinfo-value">2</span></div>
+    <div class="webinfo-item"><span class="webinfo-label">标签</span><span class="webinfo-value">1</span></div>
+    <div class="webinfo-item"><span class="webinfo-label">分类</span><span class="webinfo-value">1</span></div>
+    <div class="webinfo-item"><span class="webinfo-label">运行</span><span class="webinfo-value" id="webinfo-runtime" data-since="2026-10-09">--</span><span class="webinfo-unit">天</span></div>
+    <div class="webinfo-item" id="webinfo-busuanzi" hidden>
+      <span class="webinfo-label">访客</span><span class="webinfo-value" id="busuanzi_value_site_uv">--</span>
+    </div>
+    <div class="webinfo-item" id="webinfo-busuanzi-pv" hidden>
+      <span class="webinfo-label">浏览</span><span class="webinfo-value" id="busuanzi_value_site_pv">--</span>
+    </div>
+  </div>
+</div>
+
+  </div>
+</aside>
+
+  
+  <div id="toc-aside" class="toc-aside card-widget" hidden>
+    <div class="item-headline"><i class="fa-solid fa-list"></i><span>目录</span></div>
+    <ol id="toc-list" class="toc-list"></ol>
+  </div>
+  
+
+    </main>
+
+    <footer id="footer">
+      
+<div class="footer-wrap">
+  <div class="footer-icons" aria-hidden="true">
+    <span class="footer-decoration"><i class="fa-solid fa-feather"></i></span>
+  </div>
+  <div class="footer-content">
+    <div class="footer-info">
+      <p class="footer-site-name">biu的折腾日记</p>
+      <p class="footer-tagline">搞点有趣的项目玩玩</p>
+      <div class="footer-social">
+        
+<a class="social-icon" href="mailto:wsad5d4j@outlook.com" title="Email" rel="noopener"><i class="fa-solid fa-envelope"></i></a>
+
+<a class="social-icon" href="https://github.com/mkrabbit" title="GitHub" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
+
+<a class="social-icon" href="https://space.bilibili.com/184994103" title="哔哩哔哩" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili"></i></a>
+<a class="social-icon" href="/atom.xml" title="RSS" rel="noopener"><i class="fa-solid fa-rss"></i></a>
+
+      </div>
+    </div>
+    <div class="footer-nav">
+      <a href="/">首页</a>
+      <a href="/archives/">归档</a>
+      <a href="/tags/">标签</a>
+      <a href="/categories/">分类</a>
+      <a href="/links/">友链</a>
+      <a href="/about/">关于</a>
+    </div>
+    
+    <div class="footer-extra"><a href="https://hexo.io">Powered by Gridea Pro</a></div>
+    
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copyright">biu by {YEAR}</p>
+    
+  </div>
+</div>
+
+    </footer>
+  </div>
+
+  
+<div id="rightside" class="rightside">
+  <div id="rightside-config-hide">
+    <button class="rightside-btn" data-action="toggle-toc" title="目录" hidden id="rightside-toc"><i class="fa-solid fa-list"></i></button>
+    <button class="rightside-btn" data-action="toggle-theme" title="切换主题"><i class="fa-solid fa-circle-half-stroke"></i></button>
+  </div>
+  
+  <button class="rightside-btn scroll-to-top" data-action="scroll-to-top" title="回到顶部" hidden><i class="fa-solid fa-angle-up"></i></button>
+  
+</div>
+
+
+
+  
+    
+<div id="search-modal" class="search-modal" hidden>
+  <div class="search-modal-backdrop" data-action="close-search"></div>
+  <div class="search-modal-panel">
+    <div class="search-modal-header">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="search-input" type="search" placeholder="搜索文章标题、标签、内容…" autocomplete="off" spellcheck="false">
+      <button class="search-modal-close" data-action="close-search" type="button" aria-label="关闭搜索"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results" class="search-results"></ul>
+      <div id="search-empty" class="search-empty" hidden>未找到匹配的内容</div>
+      <div id="search-tip" class="search-tip">输入关键词开始搜索，按 Esc 关闭</div>
+    </div>
+  </div>
+</div>
+
+    
+<script id="search-index-data" type="application/json">
+{
+  "posts": [
+    
+      
+        
+        {
+          "title": "使用MDT+WDS+PXE进行网络部署Windows",
+          "link": "/post/MWPdeploy/",
+          "date": "2026-10-09T23:34:09+08:00",
+          "feature": "",
+          "tags": ["WDS部署服务"],
+          "excerpt": "配置环境：Windows Server 2016 Standard 1607\n前期准备\n将服务器的网卡设置为静态ip，以便使用DHCP服务\n设置选项在：控制面板\\网络和 Internet\\网络连接-网卡属性-IPV4\n例如以下：\nIP地址：10.0.0.100\n子网掩码：255.0.0.0\n其他可不设置\n\n将主机名设置简单一些方便后续填写\n设置选项在：服务器管理器-本地服务器-计算机名\n\n单..."
+        },
+        
+      
+        
+      
+    
+  ]
+}
+</script>
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script id="liushen-config-data" type="application/json">
+{
+  "domain": "https://mkrabbit.xyz",
+  "siteName": "biu的折腾日记",
+  "defaultTheme": "auto",
+  "tocEnable": true,
+  "codeCopy": true,
+  "readingProgress": true,
+  "scrollToTop": true,
+  "heatmapEnable": true,
+  "randomPostEnable": true,
+  "subtitleSpeed": 120,
+  "subtitleList": "既然选择远方，当不负青春，砥砺前行。\n青春由磨砺而出彩，人生因奋斗而升华！\n但行前路，不负韶华！\n每一个裂缝都是为透出光而努力",
+  "navMenuJson": "[]"
+}
+  </script>
+  <script>
+    (function(){
+      try { window.LIUSHEN_CONFIG = JSON.parse(document.getElementById('liushen-config-data').textContent); }
+      catch (e) { window.LIUSHEN_CONFIG = {}; }
+    })();
+  </script>
+  <script src="/scripts/main.js" defer></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  
+  
+<script>console.log("\n%c ✦ Gridea Pro v1.3.0-beta.2 %c · Theme: Gridea-Pro gridea-pro-themes main themes-liushen v1.0.0 · https://gridea.pro %c\n","color:#fadfa3;background:#111111;padding:9px 14px;border-radius:4px 0 0 4px;font-weight:500;font-size:12px","color:#e05c00;background:#fff3ec;padding:9px 14px;border-radius:0 4px 4px 0;font-size:11px","")</script>
 </body>
-
 </html>
