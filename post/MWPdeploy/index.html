@@ -8,7 +8,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="generator" content="Gridea Pro · Liushen Theme">
   <meta name="generator" content="Gridea Pro 1.3.0-beta.2">
-  <title>使用MDT+WDS+PXE进行网络部署Windows | biu的折腾日记</title>
+  <title>使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装 | biu的折腾日记</title>
   <meta name="description" content="配置环境：Windows Server 2016 Standard 1607
 前期准备
 将服务器的网卡设置为静态ip，以便使用DHCP服务
@@ -20,7 +20,7 @@ IP地址：10.0.0.100
 
 将主机名设置...">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows">
+  <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">
   <meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607
 前期准备
 将服务器的网卡设置为静态ip，以便使用DHCP服务
@@ -68,9 +68,9 @@ IP地址：10.0.0.100
   
 <meta name="description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <link rel="canonical" href="https://mkrabbit.xyz/post/MWPdeploy/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-09T18:12:39+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mkrabbit.xyz","name":"biu的折腾日记","position":1},{"@type":"ListItem","item":"https://mkrabbit.xyz/post/MWPdeploy/","name":"使用MDT+WDS+PXE进行网络部署Windows","position":2}]}</script>
-<meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-14T16:11:50+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mkrabbit.xyz","name":"biu的折腾日记","position":1},{"@type":"ListItem","item":"https://mkrabbit.xyz/post/MWPdeploy/","name":"使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装","position":2}]}</script>
+<meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">
 <meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <meta property="og:url" content="https://mkrabbit.xyz/post/MWPdeploy/">
 <meta property="og:type" content="article">
@@ -78,7 +78,7 @@ IP地址：10.0.0.100
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://mkrabbit.xyz/post/MWPdeploy/">
-<meta name="twitter:title" content="使用MDT+WDS+PXE进行网络部署Windows">
+<meta name="twitter:title" content="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">
 <meta name="twitter:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
 </head>
@@ -203,7 +203,7 @@ IP地址：10.0.0.100
 
   <header id="page-header" class="post-bg nav-fixed-spacer" style="background-image:url('/media/images/default-top.svg')">
     <div id="post-info">
-      <h1 class="post-title">使用MDT+WDS+PXE进行网络部署Windows</h1>
+      <h1 class="post-title">使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装</h1>
       <div id="post-meta">
         <span class="post-meta-item"><i class="far fa-calendar-alt"></i> <time datetime="2026-10-09T23:34:09+08:00">2026-10-09T23:34:09+08:00</time></span>
         
@@ -211,8 +211,8 @@ IP地址：10.0.0.100
           <a href="/tag/wds-bu-shu-fu-wu/">WDS部署服务</a>
         </span>
         
-        <span class="post-meta-item"><i class="far fa-clock"></i> 4 min read 分钟阅读</span>
-        <span class="post-meta-item"><i class="fa-solid fa-pen-nib"></i> 1522 字</span>
+        <span class="post-meta-item"><i class="far fa-clock"></i> 16 min read 分钟阅读</span>
+        <span class="post-meta-item"><i class="fa-solid fa-pen-nib"></i> 6044 字</span>
       </div>
     </div>
     
@@ -333,13 +333,225 @@ IP地址：10.0.0.100
 <p><img src="/post-images/1791539952290808600.png" alt="" /></p>
 <p>一路next，完成即可</p>
 <h1 id="wds">配置WDS</h1>
+<p>服务器管理器-WDS-服务器右键-Windows部署服务管理控制台</p>
+<img src="/post-images/1791796112877566100.png" alt="" width="566">
+<p>展开服务器-右键WDS-配置服务器</p>
+<p><img src="/post-images/1791796164862266500.png" alt="" /></p>
+<p>下一步，选择独立服务器</p>
+<img src="/post-images/1791796201358242600.png" alt="" width="539">
+<p>下一步，建议修改文件夹路径，我选择D盘</p>
+<img src="/post-images/1791796286795997300.png" alt="" width="558">
+<p>下一步，默认，因为打算使用本机的DHCP服务，下一步，相应所有客户端计算机，下一步，完成</p>
+<img src="/post-images/1791796350959572600.png" alt="" width="540">
+<p>回到Windows部署服务窗口，右键WDS-所有任务-启动</p>
+<p><img src="/post-images/1791796472733084800.png" alt="" /></p>
+<p>展开WDS-右键启动映像-添加启动映像</p>
+<p><img src="/post-images/1791796530014864300.png" alt="" /></p>
+<p>选择MDT生成的启动映像文件</p>
+<p><img src="/post-images/1791796582542291000.png" alt="" /></p>
+<p>一路下一步，完成</p>
+<p>依旧在Windows部署服务窗口右键WDS选择属性-启动，修改pxe启动策略为始终继续PXE启动（只建议需要无人值守安装的这么修改，不改的情况下进入PXE系统需要按回车键）</p>
+<img src="/post-images/1791797370539057600.png" alt="" width="347">
+<p>接下来打开这两个路径的文件夹</p>
+<p>①D:\RemoteInstall\Boot\x64</p>
+<p>②C:\Windows\System32\RemInst\boot\x64</p>
+<p>将②中的wdsmgfw.efi文件复制到①中（这是解决UEFI模式的BIOS不能够进入到PXE系统的问题）</p>
+<p>在新的主机上测试是否成功进入PXE</p>
+<p><img src="/post-images/1791797426338664900.png" alt="" /></p>
+<p>成功</p>
+<p><img src="/post-images/1791797478273155300.png" alt="" /></p>
+<h1 id="heading-1">设置无人值守安装</h1>
+<p>打开路径D:\DeploymentShare\Control</p>
+<p>右键编辑Bootstrap.ini和CustomSettings.ini文件</p>
+<p>配置文件内容来源：<a href="https://www.bilibili.com/opus/1194472882300780562">https://www.bilibili.com/opus/1194472882300780562</a></p>
+<p>可根据注释自行修改配置文件</p>
+<pre><code>[Settings]
+Priority=Default
+
+[Default]
+DeployRoot=\\10.0.0.100\DeploymentShare$
+UserID=administrator
+UserPassword=Aa123456
+UserDomain=WORKGROUP
+
+SkipBDDWelcome=YES
+</code></pre>
+<pre><code>[Settings]
+Priority=Default
+; 指定 MDT 处理规则的优先级顺序。这里表示只处理 [Default] 段。
+; 如果以后有多个段（如按机型、按部门），会按 Priority 的顺序依次匹配。
+
+Properties=MyCustomProperty
+; 声明自定义属性。MyCustomProperty 是自定义变量名，可在规则或脚本中引用。
+; 如果你没有用到这个自定义属性，可以删掉或改成自己实际使用的属性名。
+
+[Default]
+;==================== 基本信息 ====================
+OSInstall=YES
+; 是否安装操作系统。YES = 执行系统安装；NO = 只做其他任务（如仅抓取镜像）。
+
+SkipCapture=YES
+; 是否跳过“捕获镜像”步骤。YES = 不捕获，直接部署。
+
+SkipDeploymentType=YES
+; 是否跳过“选择部署类型”页面。YES = 不询问，直接使用下面 DeploymentType 指定的类型。
+
+DeploymentType=NEWCOMPUTER
+; 部署类型。NEWCOMPUTER = 全新计算机部署（格式化并安装新系统）。
+; 其他常见值：REFRESH（刷新现有系统）、REPLACE（替换计算机）。
+
+;==================== 跳过所有欢迎页面 ====================
+SkipWelcome=YES
+; 跳过 MDT 向导的欢迎页面。
+
+SkipProductKey=YES
+; 跳过输入产品密钥页面。YES = 不询问密钥，使用默认或 KMS 激活。
+
+SkipLocalAdminPassword=YES
+; 跳过设置本地管理员密码页面。
+
+SkipDomainMembership=YES
+; 跳过域/工作组加入选择页面。YES = 使用下面 JoinWorkgroup 或 JoinDomain 的设置。
+
+SkipComputerName=YES
+; 跳过设置计算机名页面。YES = 使用下面 ComputerName 指定的规则。
+
+SkipUserData=YES
+; 跳过用户数据备份/还原页面（USMT）。YES = 不迁移用户数据。
+
+SkipLocaleSelection=YES
+; 跳过区域和语言选择页面。YES = 使用下面 Locale 相关设置。
+
+SkipTimeZone=YES
+; 跳过时区选择页面。YES = 使用下面 TimeZone 设置。
+
+SkipApplications=YES
+; 跳过应用程序选择页面。YES = 不手动选择要安装的应用。
+
+SkipPackages=YES
+; 跳过包选择页面。YES = 不手动选择要安装的包。
+
+SkipSummary=YES
+; 跳过部署摘要确认页面。YES = 不显示最终摘要，直接开始。
+
+SkipBitLocker=YES
+; 跳过 BitLocker 加密设置页面。YES = 不在向导中配置 BitLocker。
+
+SkipTaskSequence=YES
+; 跳过任务序列选择页面。YES = 使用下面 TaskSequenceID 指定的任务序列。
+
+TaskSequenceID=1
+; 指定要执行的任务序列 ID。001 是 MDT 中任务序列的 ID，需与你的环境一致。
+
+;==================== 区域语言（中国） ====================
+KeyboardLocale=zh-CN
+; 键盘布局：中文（简体，中国）。
+
+UserLocale=zh-CN
+; 用户区域设置：中文（简体，中国）。影响日期、时间、数字格式等。
+
+SystemLocale=zh-CN
+; 系统区域设置：中文（简体，中国）。影响非 Unicode 程序的默认编码。
+
+InputLocale=zh-CN
+; 输入法/输入区域设置：中文（简体，中国）。
+
+TimeZone=210
+; 时区索引号。210 对应中国标准时间（UTC+8）。
+
+TimeZoneName=China Standard Time
+; 时区名称。与 TimeZone 对应，明确指定为中国标准时间。
+
+;==================== 计算机名规则（可自定义） ====================
+ComputerName=PC-%SerialNumber%
+; 注释掉的规则：用“PC-”加序列号作为计算机名。%SerialNumber% 是 MDT 变量。
+
+;ComputerName=PC-%MACADDRESS%
+; 注释掉的规则：用“PC-”加 MAC 地址作为计算机名。
+
+;ComputerName=WIN10
+; 当前使用的规则：固定计算机名为 WIN10。
+; 注意：批量部署时固定名会导致重名，建议改用 %SerialNumber% 等唯一变量。
+
+;==================== 本地管理员 ====================
+SkipAdminPassword=YES
+; 跳过设置本地管理员密码页面。
+
+AdminPassword=Aa123456
+; 指定本地管理员密码。部署后 Administrator 或指定管理员账户的密码。
+
+AdminAccount=Administrator
+; 指定内置管理员账户名称。通常为 Administrator。
+
+LocalAdminAccount=Auto
+; 指定本地管理员账户。Auto = 自动使用默认本地管理员账户。
+; 也可写成具体账户名，如 LocalAdminAccount=MyAdmin。
+
+;==================== 网络设置 ====================
+JoinWorkgroup=WORKGROUP
+; 加入工作组 WORKGROUP。若加入域，则注释掉此行并启用下面 JoinDomain。
+
+;JoinDomain=contoso.com
+; 注释掉的域加入设置：加入 contoso.com 域。
+
+;DomainAdmin=administrator
+; 注释掉的域管理员账户：用于加入域。
+
+;DomainAdminPassword=P@ssw0rd
+; 注释掉的域管理员密码：用于加入域。
+
+;MachineObjectOU=OU=Computers,DC=contoso,DC=com
+; 注释掉的计算机对象 OU：指定计算机账户在 AD 中的存放位置。
+
+;==================== 自动分区（UEFI/GPT 自动） ====================
+DoNotCreateExtraPartition=NO
+; 是否不创建额外分区。NO = 创建额外分区（如恢复分区等）。
+; YES = 不创建额外分区，只保留系统分区。
+
+DriverSelectionProfile=nothing
+; 驱动程序选择配置文件。nothing = 不使用选择配置文件，按默认方式匹配驱动。
+
+DriverInjection=TRUE
+; 是否注入驱动程序。TRUE = 在部署过程中注入匹配的驱动。
+
+;==================== 自动开始部署 ====================
+FinishAction=RESTART
+; 部署完成后的动作。RESTART = 重启计算机。
+
+SkipFinalSummary=YES
+; 跳过最终摘要页面。YES = 部署完成后不显示总结。
+
+HideShell=YES
+; 是否隐藏部署过程中的 Shell。YES = 隐藏 Windows 外壳，减少用户干预。
+
+ApplyGPOPack=NO
+; 是否应用组策略包（GPO Pack）。NO = 不应用 MDT 自带的本地组策略包。
+
+;==================== 日志 ====================
+SLShare=\\%SERVERNAME%\DeploymentShare$\Logs
+; 部署日志共享路径。把日志写到指定网络共享，便于集中排查。
+; 需要把 %SERVERNAME% 替换成你的实际服务器名或 IP。
+
+EventLog=YES
+; 是否启用事件日志记录。YES = 将部署过程中的事件写入日志。
+</code></pre>
+<p>打开MDT管理页面，右键MDT Deployment Share选择Update Deployment Share，进行全量更新</p>
+<p>选择Completely regenerate the boot images</p>
+<p><img src="/post-images/1791963786529799600.png" alt="" /></p>
+<p>完成后在WDS管理页面的启动映像右键映像进行替换映像</p>
+<p><img src="/post-images/1791964001618257900.png" alt="" /></p>
+<p><img src="/post-images/1791964057177518400.png" alt="" /></p>
+<p>再次使用新电脑进入pxe系统</p>
+<p>显示这个进度条就是开始自动部署了</p>
+<p><img src="/post-images/1791965174604539700.png" alt="" /></p>
+<p>如果要安装其他镜像可以再制作task序列然后修改CustomSettings.ini文件中的参数就行了</p>
 
   </div>
 
   <div class="post-bottom">
     <div class="post-copyright">
       <ul class="post-copyright-list">
-        <li><strong>本文标题：</strong><span>使用MDT+WDS+PXE进行网络部署Windows</span></li>
+        <li><strong>本文标题：</strong><span>使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装</span></li>
         <li><strong>文章作者：</strong><span>biu的折腾日记</span></li>
         <li><strong>发布时间：</strong><span>2026-10-09T23:34:09+08:00</span></li>
         <li><strong>本文链接：</strong><a href="https://mkrabbit.xyz/post/MWPdeploy/">https://mkrabbit.xyz/post/MWPdeploy/</a></li>
@@ -447,10 +659,10 @@ IP地址：10.0.0.100
         
         <div class="aside-list-item">
           
-          <a class="thumbnail no-cover" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows"><i class="fa-solid fa-file-lines"></i></a>
+          <a class="thumbnail no-cover" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装"><i class="fa-solid fa-file-lines"></i></a>
           
           <div class="content">
-            <a class="title" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows">使用MDT+WDS+PXE进行网络部署Windows</a>
+            <a class="title" href="/post/MWPdeploy/" title="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装</a>
             <time class="date">2026-10-09T23:34:09+08:00</time>
           </div>
         </div>
@@ -616,7 +828,7 @@ IP地址：10.0.0.100
       
         
         {
-          "title": "使用MDT+WDS+PXE进行网络部署Windows",
+          "title": "使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装",
           "link": "/post/MWPdeploy/",
           "date": "2026-10-09T23:34:09+08:00",
           "feature": "",
