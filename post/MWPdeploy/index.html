@@ -66,12 +66,12 @@ IP地址：10.0.0.100
 
   
   
-<meta name="description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
+<meta name="description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 将服务器的网卡设置为静态ip，以便使用DHCP服务 &amp;lt;span style=“f&amp;hellip;">
 <link rel="canonical" href="https://mkrabbit.xyz/post/MWPdeploy/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 \u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-14T16:16:10+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装","url":"https://mkrabbit.xyz/post/MWPdeploy/","description":"配置环境：Windows Server 2016 Standard 1607 前期准备 将服务器的网卡设置为静态ip，以便使用DHCP服务 \u0026lt;span style=“f\u0026hellip;","datePublished":"2026-10-09T23:34:09+08:00","dateModified":"2026-10-16T14:22:22+08:00","author":{"@type":"Person","name":"biu的折腾日记"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"biu的折腾日记"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://mkrabbit.xyz","name":"biu的折腾日记","position":1},{"@type":"ListItem","item":"https://mkrabbit.xyz/post/MWPdeploy/","name":"使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装","position":2}]}</script>
 <meta property="og:title" content="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">
-<meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
+<meta property="og:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 将服务器的网卡设置为静态ip，以便使用DHCP服务 &amp;lt;span style=“f&amp;hellip;">
 <meta property="og:url" content="https://mkrabbit.xyz/post/MWPdeploy/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="biu的折腾日记">
@@ -79,7 +79,7 @@ IP地址：10.0.0.100
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://mkrabbit.xyz/post/MWPdeploy/">
 <meta name="twitter:title" content="使用MDT+WDS+PXE进行网络部署Windows，并设置无人值守安装">
-<meta name="twitter:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 &amp;hellip;">
+<meta name="twitter:description" content="配置环境：Windows Server 2016 Standard 1607 前期准备 将服务器的网卡设置为静态ip，以便使用DHCP服务 &amp;lt;span style=“f&amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
 </head>
 <body class="page-post type-post">
@@ -242,14 +242,14 @@ IP地址：10.0.0.100
         
 <article id="post" class="post-detail" data-link="/post/MWPdeploy/">
   <div id="article-container" class="article-container post-content">
-    <p><span style="color: #333333; font-size: 16px">配置环境：Windows Server 2016 Standard 1607</span></p>
-<h1 id="span-stylecolor-333333-font-size-28pxspan"><span style="color: #333333; font-size: 28px">前期准备</span></h1>
-<p><span style="color: #333333; font-size: 16px">将服务器的网卡设置为静态ip，以便使用DHCP服务</span></p>
-<p><span style="color: #333333; font-size: 16px">设置选项在：控制面板\网络和 Internet\网络连接-网卡属性-IPV4</span></p>
-<p><span style="color: #333333; font-size: 16px">例如以下：</span></p>
-<p><span style="color: #333333; font-size: 16px">IP地址：10.0.0.100</span></p>
-<p><span style="color: #333333; font-size: 16px">子网掩码：255.0.0.0</span></p>
-<p><span style="color: #333333; font-size: 16px">其他可不设置</span></p>
+    <p><span style="font-size: 16px">配置环境：Windows Server 2016 Standard 1607</span></p>
+<h1 id="span-stylefont-size-28pxspan"><span style="font-size: 28px">前期准备</span></h1>
+<p><span style="font-size: 16px">将服务器的网卡设置为静态ip，以便使用DHCP服务</span></p>
+<p><span style="font-size: 16px">设置选项在：控制面板\网络和 Internet\网络连接-网卡属性-IPV4</span></p>
+<p><span style="font-size: 16px">例如以下：</span></p>
+<p><span style="font-size: 16px">IP地址：10.0.0.100</span></p>
+<p><span style="font-size: 16px">子网掩码：255.0.0.0</span></p>
+<p><span style="font-size: 16px">其他可不设置</span></p>
 <p><img src="/post-images/1791533880987658700.png" alt="" /></p>
 <p>将主机名设置简单一些方便后续填写</p>
 <p>设置选项在：服务器管理器-本地服务器-计算机名</p>
@@ -615,7 +615,7 @@ EventLog=YES
     </div>
     <div class="card-info-counts">
       <div class="count-item">
-        <div class="headline">3</div>
+        <div class="headline">4</div>
         <div class="length-num">文章</div>
       </div>
       <div class="count-item">
@@ -655,6 +655,18 @@ EventLog=YES
   <div class="item-headline"><i class="fa-solid fa-history"></i><span>最新文章</span></div>
   <div class="aside-list">
     
+      
+        
+        <div class="aside-list-item">
+          
+          <a class="thumbnail no-cover" href="/post/teamspeak3/" title="teamspeak3安装包和汉化下载地址"><i class="fa-solid fa-file-lines"></i></a>
+          
+          <div class="content">
+            <a class="title" href="/post/teamspeak3/" title="teamspeak3安装包和汉化下载地址">teamspeak3安装包和汉化下载地址</a>
+            <time class="date">2026-10-20T16:46:13Z</time>
+          </div>
+        </div>
+        
       
         
         <div class="aside-list-item">
@@ -707,7 +719,7 @@ EventLog=YES
           
           <a class="card-category-list-link" href="/category/default/">
             <span class="card-category-list-name">默认分类</span>
-            <span class="card-category-list-count">2</span>
+            <span class="card-category-list-count">3</span>
           </a>
         </li>
         
@@ -741,7 +753,7 @@ EventLog=YES
 <div class="card-widget card-webinfo">
   <div class="item-headline"><i class="fa-solid fa-chart-pie"></i><span>网站统计</span></div>
   <div class="webinfo">
-    <div class="webinfo-item"><span class="webinfo-label">文章</span><span class="webinfo-value">3</span></div>
+    <div class="webinfo-item"><span class="webinfo-label">文章</span><span class="webinfo-value">4</span></div>
     <div class="webinfo-item"><span class="webinfo-label">标签</span><span class="webinfo-value">2</span></div>
     <div class="webinfo-item"><span class="webinfo-label">分类</span><span class="webinfo-value">1</span></div>
     <div class="webinfo-item"><span class="webinfo-label">运行</span><span class="webinfo-value" id="webinfo-runtime" data-since="2026-10-09">--</span><span class="webinfo-unit">天</span></div>
@@ -842,6 +854,17 @@ EventLog=YES
 {
   "posts": [
     
+      
+        
+        {
+          "title": "teamspeak3安装包和汉化下载地址",
+          "link": "/post/teamspeak3/",
+          "date": "2026-10-20T16:46:13Z",
+          "feature": "",
+          "tags": [],
+          "excerpt": "安装包：官方        国内       蓝奏云    由https://teamspeak.app/ 提供\n汉化：GitHub\nbiu的小窝语音频道服务器地址：hw1.mkrabbit.xyz\n"
+        },
+        
       
         
         {
