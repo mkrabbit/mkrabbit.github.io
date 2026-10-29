@@ -591,9 +591,15 @@ EventLog=YES
     <i class="fa-solid fa-comments"></i>
     <span>评论</span>
   </div>
-  <div id="gridea-comments" data-post-link="/post/MWPdeploy/">
-    <p class="comment-loading"><i class="fa-solid fa-spinner fa-spin"></i> 评论组件加载中…</p>
-  </div>
+  <div id="tcomment"></div>
+  <script src="https://cdn.jsdelivr.net/npm/twikoo@latest/dist/twikoo.all.min.js"></script>
+  <script>
+    twikoo.init({
+      envId: 'https://hw1.mkrabbit.xyz/', 
+      el: '#tcomment',
+      lang: 'zh-CN',
+    });
+  </script>
 </section>
 
 </article>
